@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+    nginx:
+        container_name: nginx
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile-nginx
+        volumes:
+            - ./symfony/:/var/www/html/
+        ports:
+            - 8011:80
+        networks:
+            - symfony
+        depends_on: 
+            - php
+    php:
+        container_name: php
+        build:
+            context: .
+            dockerfile: ./docker/php/Dockerfile-php
+        environment:
+            APP_ENV: dev
+            DATABASE_URL: "mysql://umbus1zu53veqx6d:ZvWtm827MQNxeNUKXuEA@bl8qtrgmtophrxiuoyie-mysql.services.clever-cloud.com:3306/bl8qtrgmtophrxiuoyie"
+        expose:
+            - 9000
+        volumes:
+            - ./symfony/:/var/www/html/
+        networks:
+            - symfony
+networks:
+    symfony:
+volumes:
+    symfony:
