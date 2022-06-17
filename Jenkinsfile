@@ -15,7 +15,7 @@ pipeline {
         stage('deploy') {
             steps {
                 sh 'docker-compose run php composer update symfony/flex --no-plugins --no-scripts'
-                sh 'docker-compose run php composer update'
+                sh 'docker-compose run php composer install'
                 sh 'docker-compose up'
             }
         }
