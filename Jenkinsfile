@@ -14,7 +14,7 @@ pipeline {
         }
         stage('deploy') {
             steps {
-                sh 'docker-compose run php composer install'
+                sh 'docker-compose run php composer update'
                 sh 'docker-compose up'
             }
         }
