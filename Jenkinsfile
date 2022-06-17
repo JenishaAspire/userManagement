@@ -1,4 +1,3 @@
-def dockerRun = 'docker-compose up --build; bash -l'
 pipeline {
     agent any
     stages  {
@@ -7,15 +6,14 @@ pipeline {
                git credentialsId: 'gitHub', url: 'https://github.com/JenishaAspire/userManagement'
             }
         }
-        stage('Test') {
+        stage('setup') {
             steps {
-                sh 'echo "Test"'
+                sh 'docker system prune -a'
+                sh 'docker-compose run php composer install'
             }
         }
         stage('deploy') {
-            steps {
-                sh 'docker-compose run php composer update symfony/flex --no-plugins --no-scripts'
-                sh 'docker-compose run php composer install'
+            steps {  
                 sh 'docker-compose up'
             }
         }
