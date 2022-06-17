@@ -4,7 +4,7 @@ pipeline {
     stages  {
         stage('checkout') {
             steps {
-               git credentialsId: 'gitHub', url: 'https://github.com/jenishapriscilla/DeploymentFundamental'
+               git credentialsId: 'gitHub', url: 'https://github.com/JenishaAspire/userManagement'
             }
         }
         stage('deploy') {
