@@ -1,4 +1,3 @@
-def dockerRun = 'docker-compose up --build; bash -l'
 pipeline {
     agent any
     stages  {
@@ -7,8 +6,14 @@ pipeline {
                git credentialsId: 'gitHub', url: 'https://github.com/JenishaAspire/userManagement'
             }
         }
-        stage('deploy') {
+        stage('setup') {
             steps {
+                sh 'docker system prune -a -f'
+                sh 'docker-compose run php composer install'
+            }
+        }
+        stage('deploy') {
+            steps {  
                 sh 'docker-compose up'
             }
         }
