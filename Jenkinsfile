@@ -7,6 +7,11 @@ pipeline {
                git credentialsId: 'gitHub', url: 'https://github.com/JenishaAspire/userManagement'
             }
         }
+        stage('Test') {
+            steps {
+                sh 'echo "Test"'
+            }
+        }
         stage('deploy') {
             steps {
                 sh 'docker-compose up'
