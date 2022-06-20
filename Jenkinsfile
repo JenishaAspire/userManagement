@@ -13,10 +13,11 @@ pipeline {
             }
         }
         stage('deploy') {
-            def dockerRun = 'docker-compose up'
-            sshagent(['JenishaAspireAws']) {  
-                sh "ssh -o StrictHostKeyChecking=no ec2-user@1ec2-3-87-199-183.compute-1.amazonaws.com ${dockerRun}"
-            }
+            steps {
+		 def dockerRun = 'docker-compose up'
+		 sshagent(['JenishaAspireAws']) {  
+		    sh "ssh -o StrictHostKeyChecking=no ec2-user@1ec2-3-87-199-183.compute-1.amazonaws.com ${dockerRun}"
+		 }
         }
     }
 }
