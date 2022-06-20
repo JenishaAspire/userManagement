@@ -8,8 +8,8 @@ pipeline {
         }
         stage('setup') {
             steps {
-                sh 'docker system prune -a -f'
-                sh 'docker-compose run php composer install'
+//                 sh 'docker system prune -a -f'
+//                 sh 'docker-compose run php composer install'
             }
         }
         stage('deploy') {
