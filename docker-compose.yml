@@ -13,9 +13,9 @@ services:
         networks:
             - symfony
         depends_on: 
-            - php-stage
-    php-stage:
-        container_name: php-stage
+            - php
+    php:
+        container_name: php
         build:
             context: .
             dockerfile: ./docker/php/Dockerfile-php
