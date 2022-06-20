@@ -15,7 +15,7 @@ pipeline {
         stage('deploy') {
             steps {
 		 sshagent(credentials :['JenishaAspireAws']) {  
-		    sh "docker-compose -H ec2-user@ec2-3-87-199-183.compute-1.amazonaws.com:8011 up"
+		    sh 'docker-compose -H "ec2-user@3.87.199.183" up'
 		 }
 	    }
         }
