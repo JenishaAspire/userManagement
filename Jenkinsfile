@@ -15,7 +15,7 @@ pipeline {
         stage('deploy') {
             steps {
 		 sshagent(credentials :['JenishaAspireAws']) {  
-		    sh "ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-87-199-183.compute-1.amazonaws.com docker-compose up"
+		    sh "DOCKER_HOST='ssh -o StrictHostKeyChecking=no ec2-user@ec2-3-87-199-183.compute-1.amazonaws.com' docker-compose up"
 		 }
 	    }
         }
