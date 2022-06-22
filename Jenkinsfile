@@ -12,7 +12,7 @@ pipeline {
         stage('deploy') {
             steps {
 		 withCredentials([aws(accessKeyVariable:'AWS_ACCESS_KEY_ID', credentialsId:'JenishaAwsEC2', secretKeyVariable:'AWS_SECRET_ACCESS_KEY')]) {
-                     sh 'mkdir test'
+                     sh 'echo "hello Jenkins">hello.txt'
                  }
 	    }
         }
