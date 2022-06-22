@@ -9,16 +9,16 @@ pipeline {
                git credentialsId: 'gitHub', url: 'https://github.com/JenishaAspire/userManagement'
             }
         }
-	    stage('de') {
+	stage('de') {
             steps {
 		  sh "pwd"
 	    }
         }
         stage('deploy') {
             steps {
-		 withCredentials([aws(accessKeyVariable:'AWS_ACCESS_KEY_ID', credentialsId:'JenishaAwsEC2', secretKeyVariable:'AWS_SECRET_ACCESS_KEY')]) {
-                     sh "pwd"
-                 }
+		 sshagent(['JenishaAspireAws']) {
+       			sh "ssh -o StrictHostKeyChecking=no ec2-user@44.206.230.72 mkdir test"
+     		 }
 	    }
         }
     }
