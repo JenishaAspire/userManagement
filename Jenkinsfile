@@ -6,17 +6,11 @@ pipeline {
                git credentialsId: 'gitHub', url: 'https://github.com/JenishaAspire/userManagement'
             }
         }
-        stage('setup') {
-            steps {
-                sh 'docker system prune -a -f'
-                sh 'docker-compose run php composer install'
-            }
-        }
         stage('deploy') {
             steps {
-		 sshagent(credentials :['JenishaAspireAws']) {  
-		    sh 'DOCKER_HOST=tcp://3.87.199.183:2375 docker-compose up'
-		 }
+		 withCredentials([aws(accessKeyVariable:'AWS_ACCESS_KEY_ID', credentialsId:'JenishaAwsEC2', secretKeyVariable:'AWS_SECRET_ACCESS_KEY')]) {
+                     sh 'aws ec2 describe-instances'
+                 }
 	    }
         }
     }
