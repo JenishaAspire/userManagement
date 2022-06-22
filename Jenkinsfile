@@ -9,6 +9,11 @@ pipeline {
                git credentialsId: 'gitHub', url: 'https://github.com/JenishaAspire/userManagement'
             }
         }
+	    stage('de') {
+            steps {
+		  sh "pwd"
+	    }
+        }
         stage('deploy') {
             steps {
 		 withCredentials([aws(accessKeyVariable:'AWS_ACCESS_KEY_ID', credentialsId:'JenishaAwsEC2', secretKeyVariable:'AWS_SECRET_ACCESS_KEY')]) {
