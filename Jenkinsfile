@@ -17,7 +17,7 @@ pipeline {
         stage('deploy') {
             steps {
 		 sshagent(['JenishaAspireAws']) {
-       			sh "ssh -o StrictHostKeyChecking=no ec2-user@44.206.230.72 git clone https://github.com/JenishaAspire/userManagement.git"
+       			sh "ssh -o StrictHostKeyChecking=no ec2-user@44.206.230.72 cd userManagement && git checkout env.BRANCH_NAME && docker compose up"
      		 }
 	    }
         }
